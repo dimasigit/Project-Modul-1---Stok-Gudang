@@ -1,0 +1,235 @@
+print("Nama = Dimas Sigit Priyatna")
+
+
+
+print("Project Modul 1 ==> Stok ATK") 
+Menu = ['1. Laporan Data Stok ATK',
+        '2. Menambahkan Data Stok ATK',
+        '3. Mengubah Data Stok ATK',
+        '4. Menghapus Data Stok ATK',
+        '5. Keluar']
+
+stok = [{'Kode' : 'PSL01', 'Nama' : 'Pensil', 'Spesifikasi' : '12 cm', 
+             'Jumlah' : 100, 'Lokasi' : 'T04'},
+        {'Kode' : 'PLN11', 'Nama' : 'Pulpen', 'Spesifikasi' : 'Hitam', 
+             'Jumlah' : 125, 'Lokasi' : 'T17'},
+        {'Kode' : 'SPD21', 'Nama' : 'Spidol', 'Spesifikasi' : 'Merah', 
+             'Jumlah' : 80, 'Lokasi' : 'T12'},
+        {'Kode' : 'PGS15', 'Nama' : 'Penghapus', 'Spesifikasi' : 'Kotak', 
+             'Jumlah' : 15, 'Lokasi' : 'E08'},
+        {'Kode' : 'PGR18', 'Nama' : 'Penggaris', 'Spesifikasi' : '30 cm', 
+             'Jumlah' : 30, 'Lokasi' : 'B12'}]
+
+    
+def Main_Menu () :
+    MainMenu = True
+    while MainMenu != '5' :
+        print ("*****Data Record Stok ATK*****")
+        for i in Menu :
+            print (i)
+        MainMenu = input('Silakan pilih Main_Menu [1-5] : ')
+        if MainMenu == '1' :
+            Laporan_Menu()
+        elif MainMenu == '2' :
+            Create_Menu()
+        elif MainMenu == '3' :
+            Update_Menu()
+        elif MainMenu == '4' :
+            Delete_Menu()    
+        elif MainMenu == '5':
+            print ('***Terima Kasih***')
+            break 
+              
+def Laporan_Menu () :
+    LaporanMenu = True
+    while LaporanMenu != '3' :   
+        print ('Laporan Data Stok ATK')
+        print ('1. Laporan seluruh Stok ATK')
+        print ('2. Laporan Stok ATK tertentu')
+        print ('3. Kembali ke Menu Utama') 
+        LaporanMenu = input('Silakan pilih Sub Menu Laporan Data [1-3] : ')
+    
+        if LaporanMenu == '1':
+            if len(stok) !=0 :
+                print ('Daftar Stok ATK :')
+                for j, i in enumerate (stok):
+                    print (f"{j+1}. Kode : {i['Kode']}, Nama : {i['Nama']}, Spesifikasi : {i['Spesifikasi']}, Jumlah : {i['Jumlah']}, Lokasi : {i['Lokasi']} ")
+        
+            else :
+                print ('Stok ATK tidak ada')
+            
+            continue
+
+        elif LaporanMenu == '2' :
+            if len(stok) !=0 :
+                std = input('Masukkan Kode ATK : ').upper()
+                print (f"Data ATK dengan Kode : {std}")
+                for j, i in enumerate(stok):
+                    if i ['Kode'] == std :
+                        print (f"{j+1}. Kode : {i['Kode']}, Nama : {i['Nama']}, Spesifikasi : {i['Spesifikasi']}, Jumlah : {i['Jumlah']}, Lokasi : {i['Lokasi']} ") 
+                        break
+                else :
+                    print ('ATK tidak Terdaftar')
+            else :
+                print ('Tidak ada ATK ')
+        elif LaporanMenu == '3':
+            break
+        else :
+            print ('Pilihan Menu tidak ada')
+
+
+def Create_Menu () :
+    while True :
+        print ('Menambah Data Stok ATK')
+        print ('1. Tambah Data Stok ATK')
+        print ('2. Kembali ke Menu Utama') 
+        CreateMenu = input('Silakan pilih Sub Menu Create Data [1-2] : ')     
+
+        if CreateMenu == '1':
+            if len(stok) !=0 :
+                addKode = input('Masukkan Kode ATK : ').upper()
+                for j, i in enumerate (stok):
+                    if addKode == i['Kode'] :
+                        print ('ATK sudah ada')
+                        break
+
+                else : 
+                    addNama = input('Masukkan Nama ATK : ').upper()
+                    addSpek = input('Masukkan Spesifikasi ATK : ').upper()
+                    addJml = input('Masukkan Jumlah ATK : ').upper()
+                    addLoc = input('Masukkan Lokasi ATK : ').upper()
+                    
+                    tambahan = {
+                        'Kode' : '{}'.format(addKode),
+                        'Nama' : '{}'.format(addNama),
+                        'Spesifikasi' : '{}'.format(addSpek),
+                        'Jumlah' : '{}'.format(addJml),
+                        'Lokasi' : '{}'.format(addLoc),
+                    }
+                    print('ATK yang ditambahkan adalah : ',tambahan)
+                    checkerCreate = input('Apakah sudah benar ? (Y/N) : ').upper()
+                    if checkerCreate == 'Y':
+                        stok.append(tambahan)
+                        print('ATK berhasil ditambahkan')
+                    elif checkerCreate == 'N':
+                        print('ATK tidak ditambahkan')
+                    else:
+                        continue                
+                    
+
+        elif CreateMenu == '2':
+            break        
+        
+        else :
+            print ('Pilihan Menu tidak ada')
+
+def Update_Menu () :
+    UpdateMenu = True
+    while UpdateMenu != '2' :   
+        print ('Mengubah Data Stok ATK')
+        print ('1. Ubah Data Stok ATK')
+        print ('2. Kembali ke Menu Utama') 
+        UpdateMenu = input('Silakan pilih Sub Menu Update Data [1-2] : ')     
+        
+        if UpdateMenu == '1':
+           if len(stok) !=0 :
+                updtKode = input('Masukkan Kode ATK : ').upper()
+
+                for i in range(len(stok)):
+                    if updtKode == stok[i]['Kode'] :
+                        print ('ATK yang ingin diubah adalah : ', stok[i])
+                        nameupdt = input('Masukkan kolom yang ingin diubah  : ').lower()
+
+                        if nameupdt == 'kode' :
+                            ubahKode = input('Update Kode : ').upper()
+                            confKode = input('Apakah Data akan diubah ? [Y/N] : ').lower()
+                            if confKode == 'y' :
+                                stok[i]['Kode'] = ubahKode
+                                print('Data berhasil diubah')
+                                break
+                            elif confKode == 'n' :
+                                print('Data tidak diubah')    
+
+                        if nameupdt == 'nama' :
+                            ubahNama = input('Update Nama : ').upper()
+                            confNama = input('Apakah Data akan diubah ? [Y/N] : ').lower()
+                            if confNama == 'y' :
+                                stok[i]['Nama'] = ubahNama
+                                print('Data berhasil diubah')
+                                break
+                            elif confNama == 'n' :
+                                print('Data tidak diubah')
+
+                        if nameupdt == 'spesifikasi' :
+                            ubahSpek = input('Update Spesifikasi : ').upper()
+                            confSpek = input('Apakah Data akan diubah ? [Y/N] : ').lower()
+                            if confSpek == 'y' :
+                                stok[i]['Spesifikasi'] = ubahSpek
+                                print('Data berhasil diubah')
+                                break
+                            elif confSpek == 'n' :
+                                print('Data tidak diubah')  
+
+                        if nameupdt == 'Jumlah' :
+                            ubahJmlh = input('Update Jumlah : ').upper()
+                            confJml = input('Apakah Data akan diubah ? [Y/N] : ').lower()
+                            if confJml == 'y' :
+                                stok[i]['Jumlah'] = ubahJmlh
+                                print('Data berhasil diubah')
+                                break
+                            elif confJml == 'n' :
+                                print('Data tidak diubah') 
+
+                        if nameupdt == 'lokasi' :
+                            ubahLoc = input('Update Lokasi : ').upper()
+                            confLoc = input('Apakah Data akan diubah ? [Y/N] : ').lower()
+                            if confLoc == 'y' :
+                                stok[i]['Lokasi'] = ubahLoc
+                                print('Data berhasil diubah')
+                                break
+                            elif confLoc == 'n' :
+                                print('Data tidak diubah')
+
+                    else :
+                        print ('Data tidak ada!')   
+                        break      
+                else :
+                    print ('Pilihan Menu tidak ada')             
+                        
+
+def Delete_Menu () :
+    DeleteMenu = True
+    while DeleteMenu != '2' :   
+        print ('Delete Data Stok ATK')
+        print ('1. Hapus Stok ATK')
+        print ('2. Kembali ke Menu Utama') 
+        DeleteMenu = input('Silakan pilih Sub Menu Laporan Data [1-3] : ')
+        
+        if DeleteMenu == '1':
+            if len(stok) !=0 :
+                delCode = input('Masukkan Kode ATK yang ingin dihapus : ').upper()
+                for i in range (len(stok)):
+                    if delCode == stok[i]['Kode']:
+                        print('ATK yang ingin dihapus adalah : ', stok[i])
+                        confDel = input('Apakah yakin ingin menghapus data ini ? (Y/N) : ').lower()
+                        if confDel == 'y' :
+                            del stok[i]
+                            print('ATK berhasil dihapus')
+                            break
+                        elif confDel == 'n':
+                            print('ATK tidak terhapus')
+                            break
+                        else :
+                            print('Menu yang anda masukkan salah')
+                            break
+                else :
+                    print ('ATK tidak ditemukan')
+                    break
+            else :
+                print ('ATK sudah tidak ada stok')
+        elif DeleteMenu == '2':
+            break        
+        else :
+            print ('Pilihan Menu tidak ada')
+
+Main_Menu()
